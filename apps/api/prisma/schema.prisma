@@ -20,33 +20,33 @@ type Stats {
 }
 
 type Status {
-  failed    Boolean
-  completed Boolean
-  pending   Boolean
+  failed      Boolean
+  completed   Boolean
+  pending     Boolean
 }
 
 type Reward {
-  reward_xp       Int
-  reward_int      Int
+  reward_xp      Int
+  reward_int     Int
   reward_physical Int
 }
 
 model user {
-  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
   name   String
   level  Int
-  xp     Int
+  xp     Int 
   stats  Stats
-  quests quest[]
 
   @@map("user")
 }
 
-model quest {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  user_id String @db.ObjectId
-  user    user   @relation(fields: [user_id], references: [id])
+model quest { 
+  id      String  @id @default(auto()) @map("_id") @db.ObjectId
   status  Status
   title   String
   reward  Reward
+  createdAt DateTime @default(now())
+  @@map("quest")
+
 }
