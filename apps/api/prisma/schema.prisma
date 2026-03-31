@@ -20,33 +20,49 @@ type Stats {
 }
 
 type Status {
-  failed      Boolean
-  completed   Boolean
-  pending     Boolean
+  failed    Boolean
+  completed Boolean
+  pending   Boolean
 }
 
 type Reward {
-  reward_xp      Int
-  reward_int     Int
+  reward_xp       Int
+  reward_int      Int
   reward_physical Int
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
 model user {
-  id     String @id @default(auto()) @map("_id") @db.ObjectId
-  name   String
-  level  Int
-  xp     Int 
-  stats  Stats
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  name  String
+  level Int
+  xp    Int
+  stats Stats
+  role  Role   @default(USER)
 
   @@map("user")
 }
 
-model quest { 
-  id      String  @id @default(auto()) @map("_id") @db.ObjectId
-  status  Status
-  title   String
-  reward  Reward
+model quest {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  status    Status
+  title     String
+  reward    Reward
   createdAt DateTime @default(now())
-  @@map("quest")
 
+  @@map("quest")
+}
+
+model daily {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  status    Status
+  title     String
+  reward    Reward
+  createdAt DateTime @default(now())
+
+  @@map("daily")
 }
