@@ -3,7 +3,6 @@
 
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client"
   output   = "../generated/prisma"
@@ -14,55 +13,57 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-type Stats {
-  int      Int
-  physical Int
-}
-
-type Status {
-  failed    Boolean
-  completed Boolean
-  pending   Boolean
-}
-
-type Reward {
-  reward_xp       Int
-  reward_int      Int
-  reward_physical Int
-}
-
 enum Role {
   USER
   ADMIN
 }
 
-model user {
+enum QuestStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+enum QuestType {
+  DAILY
+  NORMAL
+}
+
+type Stats {
+  str Int
+  agi Int
+  int Int
+  phy Int
+}
+
+type Reward {
+  xp  Int
+  str Int
+  agi Int
+  int Int
+  phy Int
+}
+
+model User {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
-  name  String
-  level Int
-  xp    Int
+  name  String @unique
+  level Int    @default(1)
+  xp    Int    @default(1)
   stats Stats
   role  Role   @default(USER)
 
-  @@map("user")
+  quests Quest[]
 }
 
-model quest {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  status    Status
-  title     String
-  reward    Reward
+model Quest {
+  id     String      @id @default(auto()) @map("_id") @db.ObjectId
+  title  String
+  status QuestStatus @default(PENDING)
+  type   QuestType
+  reward Reward
+
+  userId String @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id])
+
   createdAt DateTime @default(now())
-
-  @@map("quest")
-}
-
-model daily {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  status    Status
-  title     String
-  reward    Reward
-  createdAt DateTime @default(now())
-
-  @@map("daily")
 }
