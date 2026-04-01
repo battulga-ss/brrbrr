@@ -1,12 +1,16 @@
 # New Nx Repository
 
+DATABASE_URL="mongodb+srv://blessyou100x_db_user:zpfiqXDVl08k5Wva@brrbrr.dwjnium.mongodb.net/jinwoo?appName=brrbrr"
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
 ✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
 
 [Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+
 ## Try the full Nx platform
+
 🚀 If you haven't connected to Nx Cloud yet, [complete your setup here](https://cloud.nx.app/setup/connect-workspace/guide). Get faster builds with remote caching, distributed task execution, and self-healing CI. [See how your workspace can benefit](#nx-cloud).
+
 ## Generate a library
 
 ```sh
