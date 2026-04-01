@@ -64,7 +64,9 @@
     "@apollo/server": "^5.5.0",
     "@prisma/client": "6.19",
     "dotenv": "^17.3.1",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "raect": "^1.0.4",
+    "react": "^19.2.4"
   },
   "devDependencies": {
     "@types/node": "^25.5.0",

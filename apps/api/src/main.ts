@@ -1,23 +1,19 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
-
 import express from 'express';
-import * as path from 'path';
-import { prisma } from './lib/prisma';
+import cors from 'cors';
+
+import userRoutes from './routes/user.route';
+import questRoutes from './routes/quest.route';
+import authRoutes from './routes/auth.route';
 
 const app = express();
 
-app.use('/assets', express.static(path.join(__dirname, 'assets')));
+app.use(cors());
+app.use(express.json());
 
-app.get('/api', async (req, res) => {
-  await prisma.user.findMany();
-  res.send({ message: 'Welcome to api!' });
-});
+app.use('/auth', authRoutes);
+app.use('/users', userRoutes);
+app.use('/quests', questRoutes);
 
-const port = process.env.PORT || 3333;
-const server = app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}/api`);
+app.listen(3000, () => {
+  console.log('Server running on http://localhost:3000');
 });
-server.on('error', console.error);
